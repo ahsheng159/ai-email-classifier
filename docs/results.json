@@ -1,0 +1,44 @@
+{
+  "model": "qwen2.5:3b",
+  "total": 3,
+  "correct_count": 3,
+  "note": "僅自動檢查分類類別，其他文字輸出需人工審核。",
+  "results": [
+    {
+      "id": "T01",
+      "input_email": "您好，我訂購的商品已經延遲五天，但物流資訊沒有更新，請問目前配送到哪裡了？",
+      "expected_category": "物流問題",
+      "prediction": {
+        "category": "物流問題",
+        "urgency": "中",
+        "summary": "訂購商品配送延遲五天，物流資訊未更新。客戶想知道目前配送到哪裡。",
+        "suggested_reply": "您好，感謝您聯繫我們。您的訂單配送已經延遲五天，我們正在努力追蹤物流資訊。目前我們的物流合作伙伴尚未提供最新的配送地點。我們會盡快更新此資訊。請問您需要我們提供其他協助嗎？"
+      },
+      "category_correct": true
+    },
+    {
+      "id": "T02",
+      "input_email": "您好，我昨天購買的商品想辦理退貨退款，請問應該如何申請？",
+      "expected_category": "退款問題",
+      "prediction": {
+        "category": "退款問題",
+        "urgency": "中",
+        "summary": "客戶希望申請退貨退款流程。",
+        "suggested_reply": "您好，感謝您聯繫我們。請提供您的訂單編號，以便我們開始處理您的退貨退款申請。請注意，一般退款會在收到完整商品後7-14個工作天內處理完成。謝謝您的耐心等待。"
+      },
+      "category_correct": true
+    },
+    {
+      "id": "T03",
+      "input_email": "您好，我收到耳機後發現左耳完全沒有聲音，想請問可以怎麼處理？",
+      "expected_category": "產品問題",
+      "prediction": {
+        "category": "產品問題",
+        "urgency": "中",
+        "summary": "客戶收到耳機後發現左耳沒有聲音，詢問處理方式。",
+        "suggested_reply": "非常感謝您告知此問題，我們會盡快進行調查並提供解決方案。請稍等片刻，我們會聯繫您提供詳細資訊。"
+      },
+      "category_correct": true
+    }
+  ]
+}
