@@ -1,0 +1,49 @@
+
+name: Deploy GitHub Pages
+
+# 當 main 分支更新時，自動執行
+on:
+  push:
+    branches: ["main"]
+
+  # 允許從 GitHub Actions 頁面手動執行
+  workflow_dispatch:
+
+# GitHub Pages 部署所需的權限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 避免多個部署工作互相衝突
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 取得 GitHub 專案內容
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 設定 GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 3. 上傳 docs 資料夾內的網站檔案
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs
+
+      # 4. 正式部署網站
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
