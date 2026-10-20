@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="以 Python、uv、Ollama 與 Qwen2.5 建立的 AI 客服信件分類器作品展示。">
+  <title>AI 客服信件分類器 | Project Showcase</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">AI Email Classifier</a>
+      <nav aria-label="頁面導覽">
+        <a href="#about">專案介紹</a>
+        <a href="#usage">執行方法</a>
+        <a href="#results">測試結果</a>
+        <a href="#ai-use">AI 使用說明</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">PYTHON × OLLAMA × STRUCTURED OUTPUT</p>
+        <h1>AI 客服信件分類器</h1>
+        <p class="lead">使用本地大型語言模型分析客服信件，自動整理問題類別、緊急程度、摘要與建議回覆。</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#results">查看執行結果 <span aria-hidden="true">↗</span></a>
+          <a class="secondary-link" href="https://github.com/ahsheng159/ai-email-classifier" target="_blank" rel="noopener noreferrer">查看 GitHub 原始碼</a>
+        </div>
+        <p class="hero-note">本頁展示本地端程式產生的靜態結果，不會在線上呼叫 Ollama。</p>
+      </div>
+    </section>
+
+    <div class="container content">
+      <section class="panel" id="about">
+        <div class="section-title"><span class="section-number">01</span><h2>做了什麼？</h2></div>
+        <p>透過 Python 呼叫本地 Ollama 的 <strong>Qwen2.5 3B</strong> 模型，針對客服信件進行語意分析，將結果輸出為具備固定欄位的 JSON。使用 Pydantic 定義 JSON Schema 並驗證回傳格式。</p>
+        <div class="features">
+          <div><strong>信件分類</strong><span>物流、退款、產品問題、其他</span></div>
+          <div><strong>緊急程度</strong><span>高、中、低</span></div>
+          <div><strong>自動摘要</strong><span>萃取主要問題</span></div>
+          <div><strong>建議回覆</strong><span>生成繁體中文回覆草稿</span></div>
+        </div>
+        <p class="flow">客服信件 → Python → Ollama / Qwen2.5 → Pydantic 驗證 → JSON 結果</p>
+      </section>
+
+      <section class="panel" id="usage">
+        <div class="section-title"><span class="section-number">02</span><h2>怎麼執行？</h2></div>
+        <p>環境需求：Windows、Python 3.11（由 uv 管理）、uv 與 Ollama。先取得 GitHub 專案並安裝依賴，確保 Ollama 服務正在運作。</p>
+        <ol class="steps">
+          <li>安裝專案依賴：<code>uv sync</code></li>
+          <li>下載模型：<code>ollama pull qwen2.5:3b</code></li>
+          <li>執行單封分類：<code>uv run main.py</code></li>
+          <li>執行三封信件批次測試：<code>uv run batch_test.py</code></li>
+        </ol>
+        <p class="muted">批次測試會將結果儲存至 <code>docs/results.json</code>。詳情參考 <a href="https://github.com/ahsheng159/ai-email-classifier#readme" target="_blank" rel="noopener noreferrer">README</a>。</p>
+      </section>
+
+      <section class="panel" id="results">
+        <div class="section-title"><span class="section-number">03</span><h2>執行結果</h2></div>
+        <p>下列資料直接讀取 <code>docs/results.json</code>，展示實際執行的模型輸出，而不是網頁預先寫死的分類答案。</p>
+        <div class="summary">
+          <div><span class="summary-label">使用模型</span><strong id="model-name">讀取中…</strong></div>
+          <div><span class="summary-label">分類正確／測試總數</span><strong id="result-score">讀取中…</strong></div>
+        </div>
+        <div id="result-list" class="result-list" aria-live="polite"><p class="muted">正在讀取測試結果…</p></div>
+        <p class="note">提醒：僅以三封虛構信件測試基本功能。這不代表模型在真實客服資料上具有相同的準確率；分類之外的文字品質仍需人工審核。</p>
+      </section>
+
+      <section class="panel" id="ai-use">
+        <div class="section-title"><span class="section-number">04</span><h2>AI 使用說明</h2></div>
+        <p><strong>使用工具：</strong>ChatGPT 協助規劃程式架構、提供 Python 與網頁實作範例、說明 Git 操作；Ollama／Qwen2.5 3B 負責實際分析客服信件。</p>
+        <p><strong>實作與驗證：</strong>在 Windows 本地端建立 uv 專案、執行單封與三封信件分類、檢查 JSON 輸出，並將測試結果納入版本紀錄。最終部署狀態以 GitHub Actions 紀錄為準。</p>
+        <p><strong>限制與責任：</strong>AI 可能分類錯誤、誤判緊急程度或提供不適當的回覆；本程式為課程示範，未直接連結真實訂單或客服系統。對外使用前應再增加測試、個資保護與人工審核機制。</p>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><div class="container">AI Email Classifier · Python · uv · Ollama · GitHub Pages</div></footer>
+</body>
+</html>
