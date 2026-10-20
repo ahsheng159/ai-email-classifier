@@ -93,8 +93,37 @@
 
 大型語言模型可能發生分類錯誤、判斷偏差或產生不正確的回覆內容，因此模型結果仍需人工檢查。本專案目前僅進行小規模功能測試，尚未建立完整的客服分類效能評估。
 
-## 7. 後續開發
+## 7. GitHub Pages 作品部署
 
-- 建立 GitHub Pages 作品展示網站。
-- 透過 GitHub Actions 自動部署作品頁面。
-- 在網站展示模型分類結果及 AI 使用說明。
+本專案已完成 GitHub Pages 網頁部署，
+並透過 GitHub Actions 建立自動部署流程。
+
+當 main 分支有新的 Commit 並推送至 GitHub 時，
+GitHub Actions 會自動將 docs 資料夾部署至
+GitHub Pages。
+
+**作品網站：**
+
+https://ahsheng159.github.io/ai-email-classifier/
+
+**GitHub Repository：**
+
+https://github.com/ahsheng159/ai-email-classifier
+
+## 8. 金鑰安全與資料保護
+
+本專案使用 Ollama 在本地端執行 Qwen2.5 3B
+模型，不需要使用雲端 LLM API Key。
+
+專案透過 .gitignore 排除 .env 等環境設定檔，
+避免敏感資訊被意外提交至 GitHub。
+
+本專案使用虛構客服信件作為測試資料，
+不包含真實客戶的個人資料。
+
+## 9. 後續改善方向
+
+- 增加不同類別的客服測試信件。
+- 評估模型在較大測試資料集上的分類表現。
+- 改善模型產生的客服建議回覆。
+- 加入使用者自行輸入客服信件的介面。
